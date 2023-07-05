@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .countdown-container {
+      text-align: center;
+      margin-top: 100px;
+      font-size: 24px;
+    }
+
+    .small-font {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown-container">
+    <div id="countdown"></div>
+  </div>
+  
+  <div class="small-font">
+    <p>Time Calculated based on CEST — Central European Summer Time</p>
+    <p id="client-time"></p>
+  </div>
+
+  <script>
+    // Set the starting and end date (24-hour format: hh:mm:dd:mm:yy)
+    const startDate = new Date("2023-07-10T00:00:00");
+    const endDate = new Date("2023-07-15T00:00:00");
+
+    // Update the countdown every second
+    const countdown = setInterval(updateCountdown, 1000);
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeLeft = endDate - now;
+
+      // Calculate days, hours, minutes, and seconds
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      // Format the remaining time
+      const timeString = padZero(hours) + ":" + padZero(minutes) + ":" + padZero(seconds);
+
+      // Display the countdown
+      const countdownElement = document.getElementById("countdown");
+      if (timeLeft > 24 * 60 * 60 * 1000) {
+        countdownElement.innerHTML = days + " days " + timeString;
+      } else if (timeLeft > 0) {
+        countdownElement.innerHTML = timeString;
+      } else {
+        clearInterval(countdown);
+        countdownElement.innerHTML = "Countdown complete!";
+      }
+    }
+
+    // Pad a number with leading zeros if it is less than 10
+    function padZero(number) {
+      return number < 10 ? "0" + number : number;
+    }
+
+    // Display the client's time zone
+    const clientTimeElement = document.getElementById("client-time");
+    const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    clientTimeElement.innerHTML = "Your time: " + clientTimeZone;
+  </script>
+</body>
+</html>
