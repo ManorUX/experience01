@@ -35,20 +35,60 @@
   </style>
 </head>
 <body>
-  <div class="countdown-container">
+   <div class="countdown-container">
     <div id="countdown"></div>
-    <div id="message">till this messsage dissapear</div>
+    <div id="message">till this message disappear</div>
   </div>
   
   <div class="small-font">
-    <p>Time Calculated based on Central European Summer Time (CEST).<span id="client-time"></span></p>
-   
+    <p id="time-calculated-message">Time Calculated based on Central European Summer Time (CEST).<span id="client-time"></span></p>
   </div>
 
   <script>
+  
+    const translations = {
+      de: {
+        message: 'bis diese Nachricht verschwindet',
+        timeCalculated: 'Zeit berechnet auf Mitteleuropäische Sommerzeit (MESZ).',
+        fallback: 'Zeit, unsere verrückt reduzierten Produkte zu shoppen!'
+      },
+      fr: {
+        message: "jusqu'à ce que ce message disparaisse",
+        timeCalculated: 'Heure calculée en fonction de l\'heure d\'été d\'Europe centrale (CEST).',
+        fallback: 'Il est temps de magasiner nos produits à prix réduit!'
+      },
+      it: {
+        message: 'fino a quando questo messaggio scompare',
+        timeCalculated: 'Tempo calcolato in base all\'ora legale dell\'Europa centrale (CEST).',
+        fallback: 'È ora di acquistare i nostri prodotti scontati!'
+      }
+    };
+
+    const urlPath = window.location.pathname;
+    const language = urlPath.split('/')[1]; // assumes language is the first part of the path
+    const translation = translations[language] || translations['de']; // default to German if language is not supported
+
+    document.getElementById('message').innerText = translation.message;
+    document.getElementById('time-calculated-message').innerText = translation.timeCalculated;
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeLeft = endDate - now;
+
+      // ... (rest of the updateCountdown function content)
+
+      if (timeLeft > 24 * 60 * 60 * 1000) {
+        countdownElement.innerHTML = days + " days " + timeString;
+      } else if (timeLeft > 0) {
+        countdownElement.innerHTML = timeString;
+      } else {
+        clearInterval(countdown);
+        countdownElement.innerHTML = translation.fallback;
+      }
+    }
     // Set the starting and end date (24-hour format: hh:mm:dd:mm:yy)
     const startDate = new Date("2023-07-10T00:00:00");
-    const endDate = new Date("2023-11-24T00:00:00");
+  const endDate = new Date("2023-11-24T00:00:00");
 
     // Update the countdown every second
     const countdown = setInterval(updateCountdown, 1000);
