@@ -32,10 +32,35 @@
         background-color: palegoldenrod;
       font-size: 0.8rem;
     }
+        @keyframes heartbeat {
+      0% {
+        transform: scale(1);
+      }
+
+      25% {
+        transform: scale(1.1);
+      }
+
+      50% {
+        transform: scale(1);
+      }
+
+      75% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .heartbeat {
+      animation: heartbeat 1s infinite;
+    }
   </style>
 </head>
 <body>
-   <div class="countdown-container">
+   <div class="countdown-container heartbeat">
     <div id="countdown"></div>
     <div id="message">till this message disappear</div>
   </div>
