@@ -99,23 +99,9 @@
     const translation = translations[language] || translations['de']; // default to German if language is not supported
 
     document.getElementById('message').innerText = translation.message;
-    document.getElementById('time-calculated-message').innerText = translation.timeCalculated;
+    // document.getElementById('time-calculated-message').innerText = translation.timeCalculated;
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const timeLeft = endDate - now;
-
-      // ... (rest of the updateCountdown function content)
-
-      if (timeLeft > 24 * 60 * 60 * 1000) {
-        countdownElement.innerHTML = days + " days " + timeString;
-      } else if (timeLeft > 0) {
-        countdownElement.innerHTML = timeString;
-      } else {
-        clearInterval(countdown);
-        countdownElement.innerHTML = translation.fallback;
-      }
-    }
+ 
     // Set the starting and end date (24-hour format: hh:mm:dd:mm:yy)
     const startDate = new Date("2023-07-10T00:00:00");
   const endDate = new Date("2023-11-11T00:00:00");
@@ -144,7 +130,7 @@
         countdownElement.innerHTML = timeString;
       } else {
         clearInterval(countdown);
-        countdownElement.innerHTML = "Countdown complete!";
+        countdownElement.innerHTML = translation.fallback;
       }
     }
 
@@ -158,7 +144,6 @@
     const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     clientTimeElement.innerHTML = "Your time: " + clientTimeZone;
     
-    // 3d53abdaf5e358605750350b3e00beac-us11
   </script>
 </body>
 </html>
