@@ -6,10 +6,13 @@
     body {
       font-family: Milo, Arial, serif;
       background-color: #000000;  /* Default background color, black */
-      animation: cyberMondayBackground 10s infinite;
+      animation: cyberMondayBackground 15s infinite;
       color: white;
       overflow-x: hidden;
       overflow-y: hidden;
+    }
+     .heartbeat {
+      animation: heartbeat 15s infinite;
     }
 
     .countdown-container {      
@@ -158,22 +161,17 @@
   0% {
     background-color: #000000;  /* Black */
   }
-  25% {
+  33% {
     background-color: #003366;  /* Dark blue */
   }
   50% {
     background-color: #0000FF;  /* Blue */
   }
-  75% {
-    background-color: #00FFFF;  /* Cyan */
-  }
   100% {
     background-color: #000000;  /* Black */
   }
 }
-    .heartbeat {
-      animation: heartbeat 15s infinite;
-    }
+ 
   </style>
 </head>
 <body>
@@ -195,7 +193,7 @@
   
     const translations = {
       de: {
-        message: 'Frühstück im Bett. Pralinen. <br>Schaut einen Film. Abendessen für zwei. <br>Bedauern, zwei Abendessen gegessen zu haben. <br>Manor.ch ansehen.',
+        message: 'Cybermonday. <br>Manor.ch ansehen.',
         timeCalculated: 'Zeit berechnet auf Mitteleuropäische Sommerzeit (MESZ).',
         fallback: 'Zeit, unsere verrückt reduzierten Produkte zu shoppen!',
           days: {
@@ -204,7 +202,7 @@
         }
       },
       fr: {
-        message: "Petit-déjeuner au lit. Chocolats. Regarder un film. Dîner pour deux. Regretter d'avoir mangé deux fois. Consulter Manor.ch",
+        message: "Cybermonday. <br>Consulter Manor.ch",
         timeCalculated: 'Heure calculée en fonction de l\'heure d\'été d\'Europe centrale (CEST).',
         fallback: 'Il est temps de magasiner nos produits à prix réduit!',
           days: {
@@ -213,7 +211,7 @@
         }
       },
       it: {
-        message: 'Colazione a letto. Guardare un film. Cena per due. Rimpiangere di aver mangiato due cene. Visita Manor.ch',
+        message: 'Cybermonday. <br>Visita Manor.ch',
         timeCalculated: 'Tempo calcolato in base all\'ora legale dell\'Europa centrale (CEST).',
         fallback: 'È ora di acquistare i nostri prodotti scontati!',
           days: {
@@ -235,7 +233,7 @@
     // Set the starting and end date (24-hour format: hh:mm:dd:mm:yy)
     const startDate = new Date();
     startDate.setHours(0, 0, 0, 0);
-    const endDate = new Date("2023-11-24T00:00:00");
+    const endDate = new Date("2023-11-27T00:00:00");
     const countdown = setInterval(updateCountdown, 1000);
   
     function updateCountdown() {
