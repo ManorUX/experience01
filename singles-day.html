@@ -25,7 +25,7 @@
     .media-container {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-evenly;
       margin: 20px 0;
       text-align: left;
     }
@@ -34,10 +34,7 @@
       max-width: 100%;
       height: auto;
     }
-    .media{
-      width: 90%;
-      text-align: center;
-    }
+
     .media img{
       padding-right: 30px;
     }
@@ -46,7 +43,12 @@
       margin-left: 20px;
       max-width: 45%; /* Prevent the text from taking more than 45% of the container width */
     }
-   /* #message {
+   /* 
+    .media{
+      width: 90%;
+      text-align: center;
+    }
+    #message {
       display: inline-block;
       font-size: 1.75rem;
       width: 60%;
@@ -250,7 +252,7 @@
     // Display the client's time zone
     const clientTimeElement = document.getElementById("client-time");
     const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    clientTimeElement.innerHTML = "Your time: " + clientTimeZone;
+    //clientTimeElement.innerHTML = "Your time: " + clientTimeZone;
     
   </script>
 </body>
