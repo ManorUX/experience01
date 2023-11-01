@@ -163,11 +163,12 @@
    <div class="countdown-container">
     <div id="countdown" class= "heartbeat"></div>
   </div>
- <div class="media-container"> 
+
+  <!--
+   <div class="media-container"> 
    <img id="media-image" src="single-people-gift.gif" alt="Singles day has it perks"/>  
    <div class="media-message" id="message">till this message disappear</div> 
  </div>
-  <!--
   <div class="small-font">
     <p id="time-calculated-message">Time Calculated based on Central European Summer Time (CEST).<span id="client-time"></span></p>
   </div>
@@ -210,7 +211,7 @@
     console.log(language);
     const translation = translations[language] || translations['de']; // default to German if language is not supported
 
-    document.getElementById('message').innerHTML = translation.message;
+    // document.getElementById('message').innerHTML = translation.message;
     // document.getElementById('time-calculated-message').innerText = translation.timeCalculated;
 
  
