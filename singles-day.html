@@ -5,7 +5,8 @@
   <style>
     body {
       font-family: Milo, Arial, serif;
-      background-color: #017141;
+      background-color: #00C7B1;
+      animation: backgroundTransition 10s infinite;
       color: white;
       overflow-x: hidden;
       overflow-y: hidden;
@@ -153,7 +154,17 @@
       transform: scale(1);
     }
   }
-
+@keyframes backgroundTransition {
+  0% {
+    background-color: #00C7B1;
+  }
+  50% {
+    background-color: #009582;  /* A darker shade of #00C7B1 */
+  }
+  100% {
+    background-color: #00C7B1;
+  }
+}
     .heartbeat {
       animation: heartbeat 15s infinite;
     }
