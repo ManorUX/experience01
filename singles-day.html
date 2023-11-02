@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Singles-Day Timer</title>
+  <title>Singles-Day 11.11</title>
   <style>
       body {
       font-family: Milo, Arial, serif;
       background-color: #000000;
-      /* Default background color, black */
       animation: backgroundTransition 15s infinite;
       color: white;
       overflow-x: hidden;
@@ -97,41 +96,28 @@
     }
   }
 @keyframes backgroundTransition {
-  0% {
-    background-color: #00C7B1;
-  }
-  50% {
-    background-color: #009582;  /* A darker shade of #00C7B1 */
-  }
-  100% {
-    background-color: #00C7B1;
-  }
-}
-    .heartbeat {
-      animation: heartbeat 15s infinite;
+    0% {
+      background-color: #00C7B1;
     }
+    50% {
+      background-color: #009582;  /* A darker shade of #00C7B1 */
+    }
+    100% {
+      background-color: #00C7B1;
+    }
+  }
+  .heartbeat {
+    animation: heartbeat 15s infinite;
+  }
   </style>
 </head>
 <body>
    <div class="countdown-container">
     <div id="countdown" class= "heartbeat"></div>
   </div>
-
-  <!--
-   <div class="media-container"> 
-   <img id="media-image" src="single-people-gift.gif" alt="Singles day has it perks"/>  
-   <div class="media-message" id="message">till this message disappear</div> 
- </div>
-  <div class="small-font">
-    <p id="time-calculated-message">Time Calculated based on Central European Summer Time (CEST).<span id="client-time"></span></p>
-  </div>
-  -->
-
   <script>
-  
-   
     // Set the starting and end date (24-hour format: hh:mm:dd:mm:yy)
-    const endDate = new Date("2023-11-24T00:00:00");
+    const endDate = new Date("2023-11-11T00:00:00");
     const startDate = new Date();
     startDate.setHours(0, 0, 0, 0);    
     const countdown = setInterval(updateCountdown, 1000);
@@ -145,12 +131,12 @@
       const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-      // const daysWord = days === 1 ? translation.days.singular : translation.days.plural;
+      const daysWord = days === 1 ? "day" : "days";
       const timeString = padZero(hours) + ":" + padZero(minutes) + ":" + padZero(seconds);
 
       const countdownElement = document.getElementById('countdown');
       if (timeLeft > 24 * 60 * 60 * 1000) {
-        countdownElement.innerHTML = days + " " + "days" + " " + timeString;
+        countdownElement.innerHTML = days + " " + daysWord + " " + timeString;
       } else if (timeLeft > 0) {
         countdownElement.innerHTML = timeString;
       } else {
@@ -158,8 +144,6 @@
         countdownElement.innerHTML = "Viel Spaß! Amusez-vous bien! Buon divertimento!";
       }
     }
-
-
     // Pad a number with leading zeros if it is less than 10
     function padZero(number) {
       return number < 10 ? "0" + number : number;
