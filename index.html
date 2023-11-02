@@ -128,13 +128,13 @@
 <body>
   <div class="countdown-container">
     <div id="countdown" class="heartbeat"></div>
-    <div id="message" class="message"></div>
+   
   </div>
 
   <script>
 
     // Set the starting and end date (24-hour format: hh:mm:dd:mm:yy)
-    const startDate = new Date("2023-11-19T00:00:00");
+    const startDate = new Date("2023-11-23T00:00:00");
     const endDate = new Date("2023-11-24T00:00:00");
     const countdown = setInterval(updateCountdown, 1000);
     startDate.setHours(0, 0, 0, 0);
@@ -165,16 +165,17 @@
       const daysWord1 = getDayWord(daysToStart);
       const daysWord2 = getDayWord(daysToEnd);
       const countdownElement = document.getElementById('countdown');
-      const messageElement = document.getElementById('message');
+     // const messageElement = document.getElementById('message');
 
       if (now < startDate) {
         countdownElement.innerHTML = daysToStart + " " + daysWord1 + " " + timeToStartString;
-        messageElement.innerHTML = "BlackDay Promo start";
+        // messageElement.innerHTML = "BlackDay Promo start";
       } else if (now >= startDate && now < endDate) {
         countdownElement.innerHTML = daysToEnd + " " + daysWord2 + " " + timeToEndString;
-        messageElement.innerHTML = "BlackDay Promo end";
+       // messageElement.innerHTML = "BlackDay Promo end";
       } else {
         clearInterval(countdown);
+        // Start over the counter
         countdownElement.innerHTML = "Viel Spaß! Amusez-vous bien! Buon divertimento!";
         messageElement.remove();
       }
