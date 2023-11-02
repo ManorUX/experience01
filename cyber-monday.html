@@ -2,10 +2,12 @@
 <html>
 
 <head>
-  <title>Cyber-Monday 26+27.11 </title>
+  <link href="https://fonts.googleapis.com/css2?family=Varta:wght@600&display=swap" rel="stylesheet">
+  <title>Cyber monday Countdown Timer</title>
+  <meta charset="utf-8">
   <style>
     body {
-      font-family: Milo, Arial, serif;
+      font-family: Varta, Arial, serif;
       background-color: #000000;
       animation: cyberMondayBackground 15s infinite;
       color: white;
@@ -30,14 +32,6 @@
       margin-bottom: 1rem;
     }
 
-    .media-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      margin: 20px 0;
-      text-align: left;
-    }
-
     .small-font {
       color: black;
       width: 100%;
@@ -49,12 +43,18 @@
       background-color: palegoldenrod;
       font-size: 0.8rem;
     }
+    #message{
+      font-size:1.5rem;
+    }
 
     /* For small screens or small containers */
     @media only screen and (max-width: 600px) {
       .countdown-container {
         font-size: 3.5rem;
       }
+      #message{
+      font-size:0.9rem;
+    }
 
     }
 
@@ -63,7 +63,9 @@
       .countdown-container {
         font-size: 4.5rem;
       }
-
+      #message{
+      font-size:1.2rem;
+    }
 
     }
 
@@ -72,6 +74,9 @@
       .countdown-container {
         font-size: 6rem;
       }
+      #message{
+      font-size:1.5rem;
+    }
 
 
     }
@@ -125,36 +130,55 @@
 <body>
   <div class="countdown-container">
     <div id="countdown" class="heartbeat"></div>
+    <div id="message" class="message"></div>
   </div>
 
   <script>
 
     // Set the starting and end date (24-hour format: hh:mm:dd:mm:yy)
-    const startDate = new Date();
-    startDate.setHours(0, 0, 0, 0);
+    const startDate = new Date("2023-11-26T00:00:00");
     const endDate = new Date("2023-11-27T00:00:00");
     const countdown = setInterval(updateCountdown, 1000);
+    startDate.setHours(0, 0, 0, 0);
+
+    function getDayWord(days) {
+      return days === 1 ? "day" : "days";
+    }
 
     function updateCountdown() {
       const now = new Date().getTime();
-      const timeLeft = endDate - now;
+      const timeLeftToStart = startDate - now;
+      const timeLeftToEnd = endDate - now;
 
-      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+      const daysToStart = Math.floor(timeLeftToStart / (1000 * 60 * 60 * 24));
+      const hoursToStart = Math.floor((timeLeftToStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutesToStart = Math.floor((timeLeftToStart % (1000 * 60 * 60)) / (1000 * 60));
+      const secondsToStart = Math.floor((timeLeftToStart % (1000 * 60)) / 1000);
 
-      // const daysWord = days === 1 ? translation.days.singular : translation.days.plural;
-      const timeString = padZero(hours) + ":" + padZero(minutes) + ":" + padZero(seconds);
+      const daysToEnd = Math.floor(timeLeftToEnd / (1000 * 60 * 60 * 24));
+      const hoursToEnd = Math.floor((timeLeftToEnd % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutesToEnd = Math.floor((timeLeftToEnd % (1000 * 60 * 60)) / (1000 * 60));
+      const secondsToEnd = Math.floor((timeLeftToEnd % (1000 * 60)) / 1000);
+      
+      const timeToStartString = padZero(hoursToStart) + ":" + padZero(minutesToStart) + ":" + padZero(secondsToStart);
+      const timeToEndString = padZero(hoursToEnd) + ":" + padZero(minutesToEnd) + ":" + padZero(secondsToEnd);
 
+      
+      const daysWord1 = getDayWord(daysToStart);
+      const daysWord2 = getDayWord(daysToEnd);
       const countdownElement = document.getElementById('countdown');
-      if (timeLeft > 24 * 60 * 60 * 1000) {
-        countdownElement.innerHTML = days + " " + "days" + " " + timeString;
-      } else if (timeLeft > 0) {
-        countdownElement.innerHTML = timeString;
+      const messageElement = document.getElementById('message');
+
+      if (now < startDate) {
+        countdownElement.innerHTML = daysToStart + " " + daysWord1 + " " + timeToStartString;
+        messageElement.innerHTML = "Cyber Promo start";
+      } else if (now >= startDate && now < endDate) {
+        countdownElement.innerHTML = daysToEnd + " " + daysWord2 + " " + timeToEndString;
+        messageElement.innerHTML = "Cyber Promo end";
       } else {
         clearInterval(countdown);
         countdownElement.innerHTML = "Viel Spaß! Amusez-vous bien! Buon divertimento!";
+        messageElement.remove();
       }
     }
 
