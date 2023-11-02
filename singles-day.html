@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Varta:wght@600&display=swap" rel="stylesheet">
   <title>Singles-Day 11.11</title>
   <style>
       body {
-      font-family: Milo, Arial, serif;
+      font-family: Varta, Arial, serif;
       background-color: #000000;
       animation: backgroundTransition 15s infinite;
       color: white;
@@ -27,26 +28,6 @@
       width: 85%;
       margin: 0 auto;
       margin-bottom: 1rem;
-    }
-
-    .media-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      margin: 20px 0;
-      text-align: left;
-    }
-
-    .small-font {
-      color: black;
-      width: 100%;
-      height: 40px;
-      padding-top: 1px;
-      text-align: center;
-      text-indent: 16px;
-      vertical-align: middle;
-      background-color: palegoldenrod;
-      font-size: 0.8rem;
     }
 
     /* For small screens or small containers */
@@ -141,7 +122,7 @@
         countdownElement.innerHTML = timeString;
       } else {
         clearInterval(countdown);
-        countdownElement.innerHTML = "Viel Spaß! Amusez-vous bien! Buon divertimento!";
+        endDate = new Date("2024-11-11T00:00:00");
       }
     }
     // Pad a number with leading zeros if it is less than 10
