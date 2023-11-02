@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Varta:wght@600&display=swap" rel="stylesheet">
-  <title>BlackFriday Timer</title>
+  <title>Blackdays Timer</title>
   <meta charset="utf-8">
   <style>
-      body {
+    body {
       font-family: Varta, Arial, serif;
       background-color: #000000;
+      animation: cyberMondayBackground 15s infinite;
       color: white;
       overflow-x: hidden;
       overflow-y: hidden;
@@ -30,10 +32,28 @@
       margin-bottom: 1rem;
     }
 
+    .small-font {
+      color: black;
+      width: 100%;
+      height: 40px;
+      padding-top: 1px;
+      text-align: center;
+      text-indent: 16px;
+      vertical-align: middle;
+      background-color: palegoldenrod;
+      font-size: 0.8rem;
+    }
+    #message{
+      font-size:1.5rem;
+    }
+
     /* For small screens or small containers */
     @media only screen and (max-width: 600px) {
       .countdown-container {
         font-size: 3.5rem;
+      }
+      #message{
+        font-size:0.9rem;
       }
 
     }
@@ -43,7 +63,9 @@
       .countdown-container {
         font-size: 4.5rem;
       }
-
+      #message{
+      font-size:1.2rem;
+    }
 
     }
 
@@ -52,37 +74,59 @@
       .countdown-container {
         font-size: 6rem;
       }
-
-
-    }
-@keyframes heartbeat {
-    0% {
-      transform: scale(1);
+        #message{
+        font-size:1.5rem;
+      }
     }
 
-    25% {
-      transform: scale(1.1);
+    @keyframes heartbeat {
+      0% {
+        transform: scale(1);
+      }
+
+      25% {
+        transform: scale(1.1);
+      }
+
+      50% {
+        transform: scale(1);
+      }
+
+      75% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(1);
+      }
     }
 
-    50% {
-      transform: scale(1);
-    }
+    @keyframes cyberMondayBackground {
+      0% {
+        background-color: #000000;
+        /* Black */
+      }
 
-    75% {
-      transform: scale(1.1);
-    }
+      33% {
+        background-color: #003366;
+        /* Dark blue */
+      }
 
-    100% {
-      transform: scale(1);
-    }
-  }
-    .heartbeat {
-      animation: heartbeat 15s infinite;
+      50% {
+        background-color: #0000FF;
+        /* Blue */
+      }
+
+      100% {
+        background-color: #000000;
+        /* Black */
+      }
     }
   </style>
 </head>
+
 <body>
-   <div class="countdown-container">
+  <div class="countdown-container">
     <div id="countdown" class="heartbeat"></div>
     <div id="message" class="message"></div>
   </div>
@@ -124,17 +168,14 @@
       const messageElement = document.getElementById('message');
 
       if (now < startDate) {
-        // countdownElement.innerHTML = `${daysToStart} ${daysWord1} ${padZero(hoursToStart)}:${padZero(minutesToStart)}:${padZero(secondsToStart)}`;
         countdownElement.innerHTML = daysToStart + " " + daysWord1 + " " + timeToStartString;
-        messageElement.innerHTML = "Cyber Promo start";
+        messageElement.innerHTML = "BlackDay Promo start";
       } else if (now >= startDate && now < endDate) {
-        //countdownElement.innerHTML = `${daysToEnd} ${daysWord2} ${padZero(hoursToEnd)}:${padZero(minutesToEnd)}:${padZero(secondsToEnd)}`;
         countdownElement.innerHTML = daysToEnd + " " + daysWord2 + " " + timeToEndString;
-        messageElement.innerHTML = "Cyber Promo end";
+        messageElement.innerHTML = "BlackDay Promo end";
       } else {
         clearInterval(countdown);
         countdownElement.innerHTML = "Viel Spaß! Amusez-vous bien! Buon divertimento!";
-        //messageElement.innerHTML = "Promotions have ended";
         messageElement.remove();
       }
     }
@@ -148,4 +189,5 @@
 
   </script>
 </body>
+
 </html>
