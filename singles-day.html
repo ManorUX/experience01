@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Countdown Timer</title>
+  <title>Singles-Day Timer</title>
   <style>
-    body {
+      body {
       font-family: Milo, Arial, serif;
-      background-color: #00C7B1;
-      animation: backgroundTransition 10s infinite;
+      background-color: #000000;
+      /* Default background color, black */
+      animation: backgroundTransition 15s infinite;
       color: white;
       overflow-x: hidden;
       overflow-y: hidden;
     }
 
-    .countdown-container {      
+    .heartbeat {
+      animation: heartbeat 15s infinite;
+    }
+
+    .countdown-container {
       text-align: center;
       margin-top: 100px;
       font-size: 6rem;
     }
-    #countdown{
+
+    #countdown {
       height: 115px;
-      width: 90%;
+      width: 85%;
       margin: 0 auto;
       margin-bottom: 1rem;
     }
+
     .media-container {
       display: flex;
       align-items: center;
@@ -30,109 +37,44 @@
       margin: 20px 0;
       text-align: left;
     }
-    
-    #media-image {
-      max-width: 100%;
-      height: auto;
-    }
 
-    .media img{
-      padding-right: 30px;
-    }
-    .media-message {
-      font-size: 1rem;
-      margin-left: 20px;
-      max-width: 45%; /* Prevent the text from taking more than 45% of the container width */
-    }
-   /* 
-    .media{
-      width: 90%;
-      text-align: center;
-    }
-    #message {
-      display: inline-block;
-      font-size: 1.75rem;
-      width: 60%;
-      line-height: 2rem;
-    }
-    */
     .small-font {
-        color:black;
-        width: 100%;
-        height: 40px;
-        padding-top: 1px;
-        text-align: center;
-        text-indent: 16px;
-        vertical-align: middle;
-        background-color: palegoldenrod;
+      color: black;
+      width: 100%;
+      height: 40px;
+      padding-top: 1px;
+      text-align: center;
+      text-indent: 16px;
+      vertical-align: middle;
+      background-color: palegoldenrod;
       font-size: 0.8rem;
     }
 
     /* For small screens or small containers */
-@media only screen and (max-width: 600px) {
-  .media-container {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: center;
-  }
+    @media only screen and (max-width: 600px) {
+      .countdown-container {
+        font-size: 3.5rem;
+      }
 
-  #media-image {
-    max-width: 100%;
-  }
+    }
 
-  .media-message {
-    margin: 20px 0 0 0;
-    max-width: none;
-  }
-  
-  .countdown-container {
-    font-size: 2rem;
-  }
-  
-  #message {
-    font-size: 1rem;
-    width:90%;
-    line-height: 1.25rem;
-  }
-  #message img{
-      display:none;
-    }  
-  
-  .small-font {
-    font-size: 0.6rem;
-  }
-}
+    /* For medium screens or containers */
+    @media only screen and (min-width: 601px) and (max-width: 800px) {
+      .countdown-container {
+        font-size: 4.5rem;
+      }
 
-/* For medium screens or containers */
-@media only screen and (min-width: 601px) and (max-width: 800px) {
-  .countdown-container {
-    font-size: 4.5rem;
-  }
-  
-  #message {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-  
-  .small-font {
-    font-size: 0.7rem;
-  }
-}
 
-/* For large screens or containers */
-@media only screen and (min-width: 801px) {
-  .countdown-container {
-    font-size: 6rem;
-  }
-  
-  #message {
-    font-size: 1.75rem;
-  }
-  
-  .small-font {
-    font-size: 0.8rem;
-  }
-}
+    }
+
+    /* For large screens or containers */
+    @media only screen and (min-width: 801px) {
+      .countdown-container {
+        font-size: 6rem;
+      }
+
+
+    }
 @keyframes heartbeat {
     0% {
       transform: scale(1);
@@ -187,85 +129,41 @@
 
   <script>
   
-    const translations = {
-      de: {
-        message: 'Frühstück im Bett. Pralinen. <br>Schaut einen Film. Abendessen für zwei. <br>Bedauern, zwei Abendessen gegessen zu haben. <br>Manor.ch ansehen.',
-        timeCalculated: 'Zeit berechnet auf Mitteleuropäische Sommerzeit (MESZ).',
-        fallback: 'Zeit, unsere verrückt reduzierten Produkte zu shoppen!',
-          days: {
-          singular: 'Tag',
-          plural: 'Tage'
-        }
-      },
-      fr: {
-        message: "Petit-déjeuner au lit. Chocolats. Regarder un film. Dîner pour deux. Regretter d'avoir mangé deux fois. Consulter Manor.ch",
-        timeCalculated: 'Heure calculée en fonction de l\'heure d\'été d\'Europe centrale (CEST).',
-        fallback: 'Il est temps de magasiner nos produits à prix réduit!',
-          days: {
-          singular: 'jour',
-          plural: 'jours'
-        }
-      },
-      it: {
-        message: 'Colazione a letto. Guardare un film. Cena per due. Rimpiangere di aver mangiato due cene. Visita Manor.ch',
-        timeCalculated: 'Tempo calcolato in base all\'ora legale dell\'Europa centrale (CEST).',
-        fallback: 'È ora di acquistare i nostri prodotti scontati!',
-          days: {
-          singular: 'giorno',
-          plural: 'giorni'
-        }
-      }
-    };
-
-    const urlPath = window.location.pathname;
-    const language = urlPath.split('/')[1]; // assumes language is the first part of the path
-    console.log(language);
-    const translation = translations[language] || translations['de']; // default to German if language is not supported
-
-    // document.getElementById('message').innerHTML = translation.message;
-    // document.getElementById('time-calculated-message').innerText = translation.timeCalculated;
-
- 
+   
     // Set the starting and end date (24-hour format: hh:mm:dd:mm:yy)
-    const startDate = new Date();
-    startDate.setHours(0, 0, 0, 0);
     const endDate = new Date("2023-11-24T00:00:00");
+    const startDate = new Date();
+    startDate.setHours(0, 0, 0, 0);    
     const countdown = setInterval(updateCountdown, 1000);
-  
+
     function updateCountdown() {
       const now = new Date().getTime();
       const timeLeft = endDate - now;
-  
+
       const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-  
-      const daysWord = days === 1 ? translation.days.singular : translation.days.plural;
+
+      // const daysWord = days === 1 ? translation.days.singular : translation.days.plural;
       const timeString = padZero(hours) + ":" + padZero(minutes) + ":" + padZero(seconds);
-  
+
       const countdownElement = document.getElementById('countdown');
-        if (timeLeft > 24 * 60 * 60 * 1000) {
-          countdownElement.innerHTML = days + " " + daysWord + " " + timeString;
-        } else if (timeLeft > 0) {
-          countdownElement.innerHTML = timeString;
-        } else {
-          clearInterval(countdown);
-          countdownElement.innerHTML = translation.fallback;
-        }
+      if (timeLeft > 24 * 60 * 60 * 1000) {
+        countdownElement.innerHTML = days + " " + "days" + " " + timeString;
+      } else if (timeLeft > 0) {
+        countdownElement.innerHTML = timeString;
+      } else {
+        clearInterval(countdown);
+        countdownElement.innerHTML = "Viel Spaß! Amusez-vous bien! Buon divertimento!";
       }
-    
+    }
+
 
     // Pad a number with leading zeros if it is less than 10
     function padZero(number) {
       return number < 10 ? "0" + number : number;
     }
-
-    // Display the client's time zone
-    const clientTimeElement = document.getElementById("client-time");
-    const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    //clientTimeElement.innerHTML = "Your time: " + clientTimeZone;
-    
   </script>
 </body>
 </html>
