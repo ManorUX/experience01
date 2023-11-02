@@ -1,160 +1,151 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Countdown Timer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Varta:wght@600&display=swap" rel="stylesheet">
+  <title>BlackFriday Timer</title>
+  <meta charset="utf-8">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: black;
+      body {
+      font-family: Varta, Arial, serif;
+      background-color: #000000;
       color: white;
       overflow-x: hidden;
+      overflow-y: hidden;
     }
 
-    .countdown-container {      
+    .heartbeat {
+      animation: heartbeat 15s infinite;
+    }
+
+    .countdown-container {
       text-align: center;
       margin-top: 100px;
-      margin-bottom: 100px;
       font-size: 6rem;
     }
 
-    #message {
-        vertical-align: middle;
-        font-variant: small-caps;
-      font-size: 2rem;
-    }
-    .small-font {
-        color:black;
-        width: 100%;
-        height: 40px;
-        padding-top: 1px;
-        text-align: center;
-        text-indent: 16px;
-        vertical-align: middle;
-        background-color: palegoldenrod;
-      font-size: 0.8rem;
-    }
-        @keyframes heartbeat {
-      0% {
-        transform: scale(1);
-      }
-
-      25% {
-        transform: scale(1.1);
-      }
-
-      50% {
-        transform: scale(1);
-      }
-
-      75% {
-        transform: scale(1.1);
-      }
-
-      100% {
-        transform: scale(1);
-      }
+    #countdown {
+      height: 115px;
+      width: 85%;
+      margin: 0 auto;
+      margin-bottom: 1rem;
     }
 
+    /* For small screens or small containers */
+    @media only screen and (max-width: 600px) {
+      .countdown-container {
+        font-size: 3.5rem;
+      }
+
+    }
+
+    /* For medium screens or containers */
+    @media only screen and (min-width: 601px) and (max-width: 800px) {
+      .countdown-container {
+        font-size: 4.5rem;
+      }
+
+
+    }
+
+    /* For large screens or containers */
+    @media only screen and (min-width: 801px) {
+      .countdown-container {
+        font-size: 6rem;
+      }
+
+
+    }
+@keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+
+    25% {
+      transform: scale(1.1);
+    }
+
+    50% {
+      transform: scale(1);
+    }
+
+    75% {
+      transform: scale(1.1);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
     .heartbeat {
       animation: heartbeat 15s infinite;
     }
   </style>
 </head>
 <body>
-   <div class="countdown-container heartbeat">
-    <div id="countdown"></div>
-    <div id="message">till this message disappear</div>
-  </div>
-  
-  <div class="small-font">
-    <p id="time-calculated-message">Time Calculated based on Central European Summer Time (CEST).<span id="client-time"></span></p>
+   <div class="countdown-container">
+    <div id="countdown" class="heartbeat"></div>
+    <div id="message" class="message"></div>
   </div>
 
   <script>
-  
-    const translations = {
-      de: {
-        message: 'bis diese Nachricht verschwindet',
-        timeCalculated: 'Zeit berechnet auf Mitteleuropäische Sommerzeit (MESZ).',
-        fallback: 'Zeit, unsere verrückt reduzierten Produkte zu shoppen!'
-      },
-      fr: {
-        message: "jusqu'à ce que ce message disparaisse",
-        timeCalculated: 'Heure calculée en fonction de l\'heure d\'été d\'Europe centrale (CEST).',
-        fallback: 'Il est temps de magasiner nos produits à prix réduit!'
-      },
-      it: {
-        message: 'fino a quando questo messaggio scompare',
-        timeCalculated: 'Tempo calcolato in base all\'ora legale dell\'Europa centrale (CEST).',
-        fallback: 'È ora di acquistare i nostri prodotti scontati!'
-      }
-    };
 
-    const urlPath = window.location.pathname;
-    const language = urlPath.split('/')[1]; // assumes language is the first part of the path
-    const translation = translations[language] || translations['de']; // default to German if language is not supported
-
-    document.getElementById('message').innerText = translation.message;
-    document.getElementById('time-calculated-message').innerText = translation.timeCalculated;
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const timeLeft = endDate - now;
-
-      // ... (rest of the updateCountdown function content)
-
-      if (timeLeft > 24 * 60 * 60 * 1000) {
-        countdownElement.innerHTML = days + " days " + timeString;
-      } else if (timeLeft > 0) {
-        countdownElement.innerHTML = timeString;
-      } else {
-        clearInterval(countdown);
-        countdownElement.innerHTML = translation.fallback;
-      }
-    }
     // Set the starting and end date (24-hour format: hh:mm:dd:mm:yy)
-    const startDate = new Date("2023-07-10T00:00:00");
-  const endDate = new Date("2023-11-24T00:00:00");
-
-    // Update the countdown every second
+    const startDate = new Date("2023-11-19T00:00:00");
+    const endDate = new Date("2023-11-24T00:00:00");
     const countdown = setInterval(updateCountdown, 1000);
+    startDate.setHours(0, 0, 0, 0);
+
+    function getDayWord(days) {
+      return days === 1 ? "day" : "days";
+    }
 
     function updateCountdown() {
       const now = new Date().getTime();
-      const timeLeft = endDate - now;
+      const timeLeftToStart = startDate - now;
+      const timeLeftToEnd = endDate - now;
 
-      // Calculate days, hours, minutes, and seconds
-      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+      const daysToStart = Math.floor(timeLeftToStart / (1000 * 60 * 60 * 24));
+      const hoursToStart = Math.floor((timeLeftToStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutesToStart = Math.floor((timeLeftToStart % (1000 * 60 * 60)) / (1000 * 60));
+      const secondsToStart = Math.floor((timeLeftToStart % (1000 * 60)) / 1000);
 
-      // Format the remaining time
-      const timeString = padZero(hours) + ":" + padZero(minutes) + ":" + padZero(seconds);
+      const daysToEnd = Math.floor(timeLeftToEnd / (1000 * 60 * 60 * 24));
+      const hoursToEnd = Math.floor((timeLeftToEnd % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutesToEnd = Math.floor((timeLeftToEnd % (1000 * 60 * 60)) / (1000 * 60));
+      const secondsToEnd = Math.floor((timeLeftToEnd % (1000 * 60)) / 1000);
+      
+      const timeToStartString = padZero(hoursToStart) + ":" + padZero(minutesToStart) + ":" + padZero(secondsToStart);
+      const timeToEndString = padZero(hoursToEnd) + ":" + padZero(minutesToEnd) + ":" + padZero(secondsToEnd);
 
-      // Display the countdown
-      const countdownElement = document.getElementById("countdown");
-      if (timeLeft > 24 * 60 * 60 * 1000) {
-        countdownElement.innerHTML = days + " days " + timeString;
-      } else if (timeLeft > 0) {
-        countdownElement.innerHTML = timeString;
+      
+      const daysWord1 = getDayWord(daysToStart);
+      const daysWord2 = getDayWord(daysToEnd);
+      const countdownElement = document.getElementById('countdown');
+      const messageElement = document.getElementById('message');
+
+      if (now < startDate) {
+        // countdownElement.innerHTML = `${daysToStart} ${daysWord1} ${padZero(hoursToStart)}:${padZero(minutesToStart)}:${padZero(secondsToStart)}`;
+        countdownElement.innerHTML = daysToStart + " " + daysWord1 + " " + timeToStartString;
+        messageElement.innerHTML = "Cyber Promo start";
+      } else if (now >= startDate && now < endDate) {
+        //countdownElement.innerHTML = `${daysToEnd} ${daysWord2} ${padZero(hoursToEnd)}:${padZero(minutesToEnd)}:${padZero(secondsToEnd)}`;
+        countdownElement.innerHTML = daysToEnd + " " + daysWord2 + " " + timeToEndString;
+        messageElement.innerHTML = "Cyber Promo end";
       } else {
         clearInterval(countdown);
-        countdownElement.innerHTML = "Countdown complete!";
+        countdownElement.innerHTML = "Viel Spaß! Amusez-vous bien! Buon divertimento!";
+        //messageElement.innerHTML = "Promotions have ended";
+        messageElement.remove();
       }
     }
+
 
     // Pad a number with leading zeros if it is less than 10
     function padZero(number) {
       return number < 10 ? "0" + number : number;
     }
 
-    // Display the client's time zone
-    const clientTimeElement = document.getElementById("client-time");
-    const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    clientTimeElement.innerHTML = "Your time: " + clientTimeZone;
-    
-    // 3d53abdaf5e358605750350b3e00beac-us11
+
   </script>
 </body>
 </html>
